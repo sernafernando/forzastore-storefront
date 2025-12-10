@@ -17,16 +17,41 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     const introLine = lines[0]?.includes(":") ? "" : lines[0] || ""
     const specLines = introLine ? lines.slice(1) : lines
 
+    // Keys to skip (not useful for display)
+    const skipKeys = [
+      "impuesto", "iva", "código universal", "sku", "condición",
+      "características adicionales", "dispositivos aptos"
+    ]
+
+    // Priority keys to show first
+    const priorityKeys = [
+      "modelo", "potencia", "voltaje", "tipo", "línea", "peso"
+    ]
+
     // Parse specs that have "Key: Value" format
-    const specs = specLines
+    const allSpecs = specLines
       .filter((line) => line.includes(":"))
       .map((line) => {
         const [key, ...valueParts] = line.split(":")
         return { key: key.trim(), value: valueParts.join(":").trim() }
       })
-      .slice(0, 6) // Show max 6 specs in summary
+      .filter((spec) => {
+        const keyLower = spec.key.toLowerCase()
+        // Skip unwanted keys and empty values
+        return !skipKeys.some(skip => keyLower.includes(skip)) && spec.value
+      })
 
-    return { intro: introLine, specs }
+    // Sort by priority
+    const sortedSpecs = allSpecs.sort((a, b) => {
+      const aIndex = priorityKeys.findIndex(k => a.key.toLowerCase().includes(k))
+      const bIndex = priorityKeys.findIndex(k => b.key.toLowerCase().includes(k))
+      if (aIndex === -1 && bIndex === -1) return 0
+      if (aIndex === -1) return 1
+      if (bIndex === -1) return -1
+      return aIndex - bIndex
+    })
+
+    return { intro: introLine, specs: sortedSpecs.slice(0, 6) }
   }
 
   const { intro, specs } = parseDescription(product.description)
