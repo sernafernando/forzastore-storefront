@@ -2,6 +2,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+:root {
+  --forza-primary: #0066cc;
+  --forza-secondary: #003d7a;
+  --forza-accent: #00a8e8;
+  --forza-dark: #1a1a1a;
+  --forza-light: #f8f9fa;
+}
+
 @layer utilities {
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
@@ -108,5 +116,32 @@
 
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
+  }
+
+  /* FORZA Buttons */
+  .btn-forza-primary {
+    @apply inline-block py-3 px-8 text-white font-medium rounded-full transition-all duration-300;
+    background: linear-gradient(135deg, var(--forza-primary) 0%, var(--forza-accent) 100%);
+  }
+
+  .btn-forza-primary:hover {
+    @apply -translate-y-1 text-white;
+    box-shadow: 0 10px 25px rgba(0, 102, 204, 0.3);
+  }
+
+  .btn-forza-outline {
+    @apply inline-block py-3 px-8 bg-transparent border-2 border-forza-primary text-forza-primary font-medium rounded-full transition-all duration-300;
+  }
+
+  .btn-forza-outline:hover {
+    @apply bg-forza-primary text-white -translate-y-1;
+  }
+
+  /* FORZA Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--forza-primary) 0%, var(--forza-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

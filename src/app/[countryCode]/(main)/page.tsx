@@ -6,9 +6,9 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "FORZA Power Technologies - Tienda Online",
   description:
-    "A performant frontend ecommerce starter template with Next.js 15 and Medusa.",
+    "Soluciones de energía inteligentes: UPS, reguladores, inversores solares y más. Protección inteligente para tu hogar y empresa.",
 }
 
 export default async function Home(props: {

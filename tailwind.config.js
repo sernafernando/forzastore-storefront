@@ -34,6 +34,13 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+        forza: {
+          primary: "#0066cc",
+          secondary: "#003d7a",
+          accent: "#00a8e8",
+          dark: "#1a1a1a",
+          light: "#f8f9fa",
+        },
       },
       borderRadius: {
         none: "0px",

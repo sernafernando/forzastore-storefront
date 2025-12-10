@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import Image from "next/image"
 
 import { listRegions } from "@lib/data/regions"
 import { StoreRegion } from "@medusajs/types"
@@ -11,7 +12,7 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
+      <header className="relative h-16 mx-auto duration-200 bg-white/95 backdrop-blur-sm shadow-sm">
         <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
@@ -22,31 +23,45 @@ export default async function Nav() {
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
+              className="flex items-center hover:opacity-90 transition-opacity"
               data-testid="nav-store-link"
             >
-              Medusa Store
+              <Image
+                src="/images/logo-forza-fixed.svg"
+                alt="FORZA Power Technologies"
+                width={120}
+                height={38}
+                className="h-[38px] w-auto"
+                priority
+              />
             </LocalizedClientLink>
           </div>
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
               <LocalizedClientLink
-                className="hover:text-ui-fg-base"
+                className="hover:text-forza-primary font-medium transition-colors"
+                href="/store"
+                data-testid="nav-store-link"
+              >
+                Tienda
+              </LocalizedClientLink>
+              <LocalizedClientLink
+                className="hover:text-forza-primary font-medium transition-colors"
                 href="/account"
                 data-testid="nav-account-link"
               >
-                Account
+                Mi Cuenta
               </LocalizedClientLink>
             </div>
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
+                  className="hover:text-forza-primary flex gap-2 font-medium transition-colors"
                   href="/cart"
                   data-testid="nav-cart-link"
                 >
-                  Cart (0)
+                  Carrito (0)
                 </LocalizedClientLink>
               }
             >
