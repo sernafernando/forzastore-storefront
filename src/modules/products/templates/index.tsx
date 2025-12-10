@@ -32,39 +32,43 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <div className="bg-gray-50 min-h-screen">
       <div
-        className="content-container flex flex-col lg:flex-row lg:items-start py-8 gap-8 relative"
+        className="content-container py-8"
         data-testid="product-container"
       >
-        {/* Gallery - Main area */}
-        <div className="w-full lg:w-1/2 order-1 lg:order-2">
-          <ImageGallery images={images} />
+        {/* Main product section */}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Gallery - Left side */}
+          <div className="w-full lg:w-3/5">
+            <ImageGallery images={images} />
+          </div>
+
+          {/* Product Info & Actions - Right side */}
+          <div className="w-full lg:w-2/5">
+            <div className="bg-white rounded-2xl p-6 shadow-md lg:sticky lg:top-24">
+              <ProductInfo product={product} />
+
+              <div className="my-6 border-t border-gray-100" />
+
+              <ProductOnboardingCta />
+              <Suspense
+                fallback={
+                  <ProductActions
+                    disabled={true}
+                    product={product}
+                    region={region}
+                  />
+                }
+              >
+                <ProductActionsWrapper id={product.id} region={region} />
+              </Suspense>
+            </div>
+          </div>
         </div>
 
-        {/* Product Info - Left sidebar */}
-        <div className="flex flex-col lg:sticky lg:top-24 lg:w-1/4 w-full gap-y-6 order-2 lg:order-1">
-          <div className="bg-white rounded-2xl p-6 shadow-md">
-            <ProductInfo product={product} />
-          </div>
+        {/* Product Details Tabs - Below */}
+        <div className="mt-8">
           <div className="bg-white rounded-2xl p-6 shadow-md">
             <ProductTabs product={product} />
-          </div>
-        </div>
-
-        {/* Actions - Right sidebar */}
-        <div className="flex flex-col lg:sticky lg:top-24 lg:w-1/4 w-full gap-y-6 order-3">
-          <div className="bg-white rounded-2xl p-6 shadow-md">
-            <ProductOnboardingCta />
-            <Suspense
-              fallback={
-                <ProductActions
-                  disabled={true}
-                  product={product}
-                  region={region}
-                />
-              }
-            >
-              <ProductActionsWrapper id={product.id} region={region} />
-            </Suspense>
           </div>
         </div>
       </div>
