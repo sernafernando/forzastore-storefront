@@ -172,15 +172,15 @@ export default function ProductActions({
             !isValidVariant
           }
           variant="primary"
-          className="w-full h-10"
+          className="w-full h-12 bg-forza-primary hover:bg-forza-secondary text-white font-semibold rounded-full transition-all duration-300"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
           {!selectedVariant && !options
-            ? "Select variant"
+            ? "Seleccionar variante"
             : !inStock || !isValidVariant
-            ? "Out of stock"
-            : "Add to cart"}
+            ? "Sin stock"
+            : "Agregar al carrito"}
         </Button>
         <MobileActions
           product={product}

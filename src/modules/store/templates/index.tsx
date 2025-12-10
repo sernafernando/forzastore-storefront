@@ -19,22 +19,32 @@ const StoreTemplate = ({
   const sort = sortBy || "created_at"
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
-      <RefinementList sortBy={sort} />
-      <div className="w-full">
-        <div className="mb-8 text-2xl-semi">
-          <h1 data-testid="store-page-title">All products</h1>
+    <div className="bg-gray-50 min-h-screen">
+      <div
+        className="flex flex-col small:flex-row small:items-start py-8 content-container"
+        data-testid="category-container"
+      >
+        <RefinementList sortBy={sort} />
+        <div className="w-full">
+          <div className="mb-8">
+            <h1
+              className="text-3xl font-bold text-gray-800"
+              data-testid="store-page-title"
+            >
+              Todos los <span className="gradient-text">Productos</span>
+            </h1>
+            <p className="text-gray-500 mt-2">
+              Encontrá la solución de energía perfecta para tu hogar o empresa
+            </p>
+          </div>
+          <Suspense fallback={<SkeletonProductGrid />}>
+            <PaginatedProducts
+              sortBy={sort}
+              page={pageNumber}
+              countryCode={countryCode}
+            />
+          </Suspense>
         </div>
-        <Suspense fallback={<SkeletonProductGrid />}>
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            countryCode={countryCode}
-          />
-        </Suspense>
       </div>
     </div>
   )
