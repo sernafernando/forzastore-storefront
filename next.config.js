@@ -33,6 +33,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "forzastore.com.ar",
+      },
+      {
+        protocol: "https",
         hostname: "medusa-public-images.s3.eu-west-1.amazonaws.com",
       },
       {
